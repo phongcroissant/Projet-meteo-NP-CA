@@ -30,4 +30,17 @@ describe("API Meteo", () => {
       },
     ]);
   });
+  it('GET /cities/:zipCode récupère une ville par son code postal', async () => {
+    const res = await request(app).get('/cities/21000');
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body).toEqual([
+      {
+        zipCode: '21000',
+        name: 'Dijon',
+      },
+    ]);
+  });
+
+
 });
