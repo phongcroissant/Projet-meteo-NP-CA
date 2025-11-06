@@ -1,0 +1,15 @@
+[
+  {
+    "id": "25000",
+    "weather": "pluie"
+    
+  },
+  {
+    "id": "21000",
+    "weather": "beau"
+  },
+  {
+    "id": "75001",
+    "weather": "neige"
+  }
+]

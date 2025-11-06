@@ -60,4 +60,13 @@ describe("API Meteo", () => {
       },
     );
   });
+    it("GET /cities/:zipCode/weather récupère la météo d'une ville par son code postal", async () => {
+    const res = await request(app).get("/cities/75001/weather");
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      zipCode: "75001",
+      name: "Paris",
+      weather:"neige"
+    });
+  });
 });

@@ -1,5 +1,6 @@
 import express from "express";
 import cities from "/cities.json";
+import weathers from "/weather.json";
 import fs from "fs";
 
 const app = express();
@@ -43,6 +44,26 @@ app.put("/cities/:zipCode", (req, res) => {
   cities[city].name= req.body.name;
   fs.writeFileSync("cities.json", JSON.stringify(cities, null, 2));
   res.status(201).json(cities[city]);
+});
+
+app.get("/cities/:zipCode/weather", (req, res) => {
+    const zipCode = req.params.zipCode;
+    const city = cities.find((c) => c.zipCode === zipCode);
+    const weatherData = weathers.find((w) => w.id === city.zipCode);
+
+
+    if (!city ) {
+      return res.status(405).json({ error: "Not found" });
+    }
+    if (!weatherData ) {
+      return res.status(404).json({ error: "Not found" });
+    }
+    const cityWeather = {
+        zipCode: weatherData.id,
+        name: city.name,
+        weather: weatherData.weather
+    };
+    res.status(200).json(cityWeather);
 });
 
 export default app;
