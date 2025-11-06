@@ -42,5 +42,9 @@ describe("API Meteo", () => {
     ]);
   });
 
+  it('DELETE cities/:zipCode supprime une ville par son code postal', async () => {
+    const res = await request(app).delete('/cities/25000');
+    expect(res.status).toBe(204);
+  });
 
 });

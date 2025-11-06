@@ -1,0 +1,14 @@
+@BASE_URL=http://localhost:6969
+
+@ZIP_CODE=21000
+
+### GET cities
+GET {{BASE_URL}}/cities
+Content-Type: application/json
+
+### GET city by zip code
+GET {{BASE_URL}}/cities/{{ZIP_CODE}}
+Content-Type: application/json
+
+### DELETE city by zip code
+DELETE {{BASE_URL}}/cities/{{ZIP_CODE}}
