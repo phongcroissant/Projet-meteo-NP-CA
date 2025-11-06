@@ -1,0 +1,33 @@
+import { describe, it, expect, afterAll } from "vitest";
+import request from "supertest";
+import app from "./server.ts";
+
+describe("API Meteo", () => {
+  it("GET /cities récupère toutes les villes", async () => {
+    const res = await request(app).get("/cities");
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body).toEqual([
+      {
+        zipCode: "75001",
+        name: "Paris",
+      },
+      {
+        zipCode: "69001",
+        name: "Lyon",
+      },
+      {
+        zipCode: "13001",
+        name: "Marseille",
+      },
+      {
+        zipCode: "21000",
+        name: "Dijon",
+      },
+      {
+        zipCode: "25000",
+        name: "Besançon",
+      },
+    ]);
+  });
+});
