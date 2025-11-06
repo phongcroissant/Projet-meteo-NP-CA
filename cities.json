@@ -1,0 +1,22 @@
+[
+  {
+    "zipCode": "75001",
+    "name": "Paris"
+  },
+  {
+    "zipCode": "69001",
+    "name": "Lyon"
+  },
+  {
+    "zipCode": "13001",
+    "name": "Marseille"
+  },
+  {
+    "zipCode": "21000",
+    "name": "Dijon"
+  },
+  {
+    "zipCode": "25000",
+    "name": "Besançon"
+  }
+]
