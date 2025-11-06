@@ -69,4 +69,17 @@ describe("API Meteo", () => {
       weather:"neige"
     });
   });
+  it("POST /cities/:zipCode/weather ajoute une météo pour une ville", async () => {
+    const newWeather = {
+      id: "13001",
+      weather: "pluie"
+    };
+    const res = await request(app)
+      .post("/cities/13001/weather")
+      .send(newWeather)
+      .set('Content-Type', 'application/json');
+    const weatherRes= await request(app).get("/weather");
+    
+    expect(res.status).toBe(201);
+  });
 });

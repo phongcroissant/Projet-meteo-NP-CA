@@ -53,10 +53,10 @@ app.get("/cities/:zipCode/weather", (req, res) => {
 
 
     if (!city ) {
-      return res.status(405).json({ error: "Not found" });
+      return res.status(404).json({ error: "City not found" });
     }
-    if (!weatherData ) {
-      return res.status(404).json({ error: "Not found" });
+    if (!weatherData) {
+      return res.status(404).json({ error: "Weather not found" });
     }
     const cityWeather = {
         zipCode: weatherData.id,
@@ -64,6 +64,22 @@ app.get("/cities/:zipCode/weather", (req, res) => {
         weather: weatherData.weather
     };
     res.status(200).json(cityWeather);
+});
+
+app.post("/cities/:zipCode/weather", (req, res) => {
+    const weather = req.body;
+    if (!weather){
+        return res.status(400).json({ error: "Bad Request" });
+    }
+    
+        const existWeather=weathers.some((w) => w.id === weather.id);
+        if (existWeather) {
+            return res.status(409).json({ error: "Conflict : data already exist" });
+        }
+    
+    weathers.push(weather);
+    fs.writeFileSync("weather.json", JSON.stringify(weathers, null, 2));
+    res.status(201).json(weather);
 });
 
 export default app;

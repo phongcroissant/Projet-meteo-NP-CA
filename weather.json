@@ -2,7 +2,6 @@
   {
     "id": "25000",
     "weather": "pluie"
-    
   },
   {
     "id": "21000",
@@ -11,5 +10,9 @@
   {
     "id": "75001",
     "weather": "neige"
+  },
+  {
+    "id": "13001",
+    "weather": "pluie"
   }
 ]
