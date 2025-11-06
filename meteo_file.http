@@ -12,3 +12,11 @@ Content-Type: application/json
 
 ### DELETE city by zip code
 DELETE {{BASE_URL}}/cities/{{ZIP_CODE}}
+
+### PUT city by zip code
+PUT {{BASE_URL}}/cities/{{ZIP_CODE}}
+Content-Type: application/json
+
+{
+  "name": "New Dijon"
+}

@@ -4,6 +4,7 @@ import fs from "fs";
 
 const app = express();
 const PORT = 6969;
+app.use(express.json());
 
 app.get("/cities", (req, res) => {
   res.status(200).json(cities);
@@ -32,16 +33,16 @@ app.delete("/cities/:zipCode", (req, res) => {
   
 });
 
-// app.put("/cities/:zipCode", (req, res) => {
-//   const zipCode = req.params.zipCode;
-//   const city = cities.findIndex((c) => c.zipCode === zipCode);
+app.put("/cities/:zipCode", (req, res) => {
+  const zipCode = req.params.zipCode;
+  const city = cities.findIndex((c) => c.zipCode === zipCode);
 
-//   if (!city) {
-//     return res.status(404).json({ error: "City not found" });
-//   }
-//   cities[city].name = req.body.name;
-//   fs.writeFileSync("cities.json", JSON.stringify(cities, null, 2));
-//   res.status(201).json(cities);
-// });
+  if (city === -1) {
+    return res.status(404).json({ error: "City not found" });
+  }
+  cities[city].name= req.body.name;
+  fs.writeFileSync("cities.json", JSON.stringify(cities, null, 2));
+  res.status(201).json(cities[city]);
+});
 
 export default app;

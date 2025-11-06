@@ -47,17 +47,17 @@ describe("API Meteo", () => {
     expect(res.status).toBe(204);
   });
 
-//   it("PUT /cities/:zipCode met à jour le nom d'une ville par son code postal", async () => {
-//     const res = await request(app)
-//       .put("/cities/21000")
-//       .send({ name: "New Dijon" });
-//     expect(res.status).toBe(201);
-//     expect(Array.isArray(res.body)).toBe(true);
-//     expect(res.body).toEqual([
-//       {
-//         zipCode: "21000",
-//         name: "New Dijon",
-//       },
-//     ]);
-//   });
+  it("PUT /cities/:zipCode", async () => {
+    const res = await request(app)
+      .put("/cities/21000")
+      .send({ name: "New Dijon" });
+
+    expect(res.status).toBe(201);
+    expect(res.body).toEqual(
+      {
+        zipCode: "21000",
+        name: "New Dijon",
+      },
+    );
+  });
 });
