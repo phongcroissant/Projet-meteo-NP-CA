@@ -90,7 +90,65 @@ app.delete("/weather/:id", (req, res) => {
   weathers.splice(weather, 1);
   fs.writeFileSync("weather.json", JSON.stringify(weathers, null, 2));
   res.status(204).json();
+});
 
+app.get("/cities/:zipCode/weather/:id", (req, res) => {
+  const zipCode = req.params.zipCode;
+  const id = parseInt(req.params.id);
+
+  const city = cities.find((c) => c.zipCode === zipCode);
+  const weatherData = weathers.find((w) => w.id === id);
+
+  if (!city) {
+    return res.status(404).json({ error: "City not found" });
+  }
+  if (!weatherData) {
+    return res.status(405).json({ error: "Weather not found" });
+  }
+  const cityWeather = {
+    id: weatherData.id,
+    zipCode: city.zipCode,
+    townName: city.name,
+    weather: weatherData.weather,
+  };
+  res.status(200).json(cityWeather);
+});
+
+app.get("/weather/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const weatherData = weathers.find((w) => w.id === id);
+  const city = cities.find((c) => c.zipCode === weatherData.zipCode);
+
+  if (!city) {
+    return res.status(404).json({ error: "City not found" });
+  }
+  if (!weatherData) {
+    return res.status(405).json({ error: "Weather not found" });
+  }
+  const cityWeather = {
+    id: weatherData.id,
+    zipCode: city.zipCode,
+    townName: city.name,
+    weather: weatherData.weather,
+  };
+  res.status(200).json(cityWeather);
+});
+
+app.post("/cities", (req, res) => {
+  const city = req.body;
+  if (!city) {
+    return res.status(400).json({ error: "Bad Request" });
+  }
+
+  const existCity = cities.some((w) => w.zipCode === city.zipCode);
+  if (existCity) {
+    return res.status(409).json({ error: "Conflict : data already exist" });
+  }
+
+  cities.push(city);
+  fs.writeFileSync("cities.json", JSON.stringify(cities, null, 2));
+  res.status(201).json(parseInt(city.id));
 });
 
 export default app;

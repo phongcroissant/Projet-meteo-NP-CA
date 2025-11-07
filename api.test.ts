@@ -87,4 +87,37 @@ describe("API Meteo", () => {
     const res = await request(app).delete("/weather/4");
     expect(res.status).toBe(204);
   });
+  it("GET /cities/:zipCode/weather/:id get all information's weather for a city", async () => {
+    const res = await request(app).get("/cities/75001/weather/3");
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: 3,
+      zipCode: "75001",
+      townName: "Paris",
+      weather:"neige"
+    });
+  });
+
+  it("GET /weather/:id get all information's weather for a city", async () => {
+    const res = await request(app).get("/cities/75001/weather/3");
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      id: 3,
+      zipCode: "75001",
+      townName: "Paris",
+      weather:"neige"
+    });
+  });
+  it("POST /cities create a city", async () => {
+    const newCity = {
+      zipCode: "14001",
+      name: "Caen"
+    };
+    const res = await request(app)
+      .post("/cities")
+      .send(newCity)
+      .set('Content-Type', 'application/json');
+    
+    expect(res.status).toBe(201);
+  });
 });

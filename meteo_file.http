@@ -1,6 +1,7 @@
 @BASE_URL=http://localhost:6969
 
 @ZIP_CODE=21000
+@ID=3
 
 ### GET cities
 GET {{BASE_URL}}/cities
@@ -36,3 +37,15 @@ Content-Type: application/json
 
 ### DELETE weather for city by zip code
 DELETE {{BASE_URL}}/weather/{{ZIP_CODE}}
+
+### GET information of city's weather by zip code and weather id
+GET {{BASE_URL}}/cities/{{ZIP_CODE}}/weather/{{ID}}
+
+### POST create a city 
+POST {{BASE_URL}}/cities
+Content-Type: application/json
+
+{
+  "zipCode": "14001",
+  "name": "Caen"
+}
