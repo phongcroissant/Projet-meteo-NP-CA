@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "./server.ts";
 
 describe("API Meteo", () => {
-  it("GET /cities récupère toutes les villes", async () => {
+  it("GET /cities get all cities", async () => {
     const res = await request(app).get("/cities");
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
@@ -30,7 +30,7 @@ describe("API Meteo", () => {
       },
     ]);
   });
-  it("GET /cities/:zipCode récupère une ville par son code postal", async () => {
+  it("GET /cities/:zipCode get a city with his zipCode", async () => {
     const res = await request(app).get("/cities/21000");
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
@@ -42,12 +42,12 @@ describe("API Meteo", () => {
     ]);
   });
 
-  it("DELETE cities/:zipCode supprime une ville par son code postal", async () => {
+  it("DELETE cities/:zipCode delete a city by his zipCode", async () => {
     const res = await request(app).delete("/cities/25000");
     expect(res.status).toBe(204);
   });
 
-  it("PUT /cities/:zipCode", async () => {
+  it("PUT /cities/:zipCode modify city's name", async () => {
     const res = await request(app)
       .put("/cities/21000")
       .send({ name: "New Dijon" });
@@ -60,7 +60,7 @@ describe("API Meteo", () => {
       },
     );
   });
-    it("GET /cities/:zipCode/weather récupère la météo d'une ville par son code postal", async () => {
+    it("GET /cities/:zipCode/weather get all information's weather for a city", async () => {
     const res = await request(app).get("/cities/75001/weather");
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
@@ -69,7 +69,7 @@ describe("API Meteo", () => {
       weather:"neige"
     });
   });
-  it("POST /cities/:zipCode/weather ajoute une météo pour une ville", async () => {
+  it("POST /cities/:zipCode/weather create a weather for a city", async () => {
     const newWeather = {
       id: "13001",
       weather: "pluie"
@@ -78,8 +78,13 @@ describe("API Meteo", () => {
       .post("/cities/13001/weather")
       .send(newWeather)
       .set('Content-Type', 'application/json');
-    const weatherRes= await request(app).get("/weather");
     
     expect(res.status).toBe(201);
+    expect(res.body).toBe(13001);
+  });
+
+  it("DELETE weather/:id delete city's weather", async () => {
+    const res = await request(app).delete("/weather/13001");
+    expect(res.status).toBe(204);
   });
 });

@@ -20,3 +20,19 @@ Content-Type: application/json
 {
   "name": "New Dijon"
 }
+
+### GET weather of city by zip code
+GET {{BASE_URL}}/weather/{{ZIP_CODE}}
+Content-Type: application/json
+
+### POST weather for city by zip code
+POST {{BASE_URL}}/cities/{{ZIP_CODE}}/weather
+Content-Type: application/json
+
+{
+  "id": "13001",
+  "weather": "pluie"
+}
+
+### DELETE weather for city by zip code
+DELETE {{BASE_URL}}/weather/{{ZIP_CODE}}

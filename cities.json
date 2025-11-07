@@ -13,6 +13,10 @@
   },
   {
     "zipCode": "21000",
-    "name": "New Dijon"
+    "name": "Dijon"
+  },
+  {
+    "zipCode": "25000",
+    "name": "Besançon"
   }
 ]

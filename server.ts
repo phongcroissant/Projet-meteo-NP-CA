@@ -79,7 +79,22 @@ app.post("/cities/:zipCode/weather", (req, res) => {
     
     weathers.push(weather);
     fs.writeFileSync("weather.json", JSON.stringify(weathers, null, 2));
-    res.status(201).json(weather);
+    res.status(201).json(parseInt(weather.id));
 });
+
+app.delete("/weather/:id", (req, res) => {
+  const id = req.params.id;
+  const weather = weathers.find((w) => w.id === id);
+
+  if (weather === -1) {
+    return res.status(404).json({ error: "Weather not found" });
+  }
+  weathers.splice(weather, 1);
+  fs.writeFileSync("weather.json", JSON.stringify(weathers, null, 2));
+  res.status(204).json();
+
+  
+});
+
 
 export default app;
