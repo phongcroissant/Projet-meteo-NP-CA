@@ -14,6 +14,7 @@ Content-Type: application/json
 ### DELETE city by zip code
 DELETE {{BASE_URL}}/cities/{{ZIP_CODE}}
 
+
 ### PUT city by zip code
 PUT {{BASE_URL}}/cities/{{ZIP_CODE}}
 Content-Type: application/json
@@ -37,9 +38,15 @@ Content-Type: application/json
 
 ### DELETE weather for city by zip code
 DELETE {{BASE_URL}}/weather/{{ZIP_CODE}}
+Content-Type: application/json
 
 ### GET information of city's weather by zip code and weather id
 GET {{BASE_URL}}/cities/{{ZIP_CODE}}/weather/{{ID}}
+Content-Type: application/json
+
+### GET information of city's weather by weather id
+GET {{BASE_URL}}/weather/{{ID}}
+Content-Type: application/json
 
 ### POST create a city 
 POST {{BASE_URL}}/cities
