@@ -56,3 +56,5 @@ Content-Type: application/json
   "zipCode": "14001",
   "name": "Caen"
 }
+### GET all weathers
+GET {{BASE_URL}}/weather

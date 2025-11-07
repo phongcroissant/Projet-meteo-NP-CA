@@ -148,7 +148,20 @@ app.post("/cities", (req, res) => {
 
   cities.push(city);
   fs.writeFileSync("cities.json", JSON.stringify(cities, null, 2));
-  res.status(201).json(parseInt(city.id));
+  res.status(201).json();
 });
 
+app.get("/weather", (req, res) => {
+
+  const allWeathers = weathers.map((weather) => {
+    const city = cities.find((c) => c.zipCode === weather.zipCode);
+    return {
+      zipCode: weather.zipCode,
+      townName: city ? city.name : null,
+      weather: weather.weather,
+    };
+  });
+
+  res.status(200).json(allWeathers);
+});
 export default app;
