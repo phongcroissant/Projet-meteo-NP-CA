@@ -8,6 +8,9 @@ const PORT = 6969;
 app.use(express.json());
 
 app.get("/cities", (req, res) => {
+  if (cities.length === 0) {
+    return res.status(404).json({ error: "No cities found" });
+  }
   res.status(200).json(cities);
 });
 

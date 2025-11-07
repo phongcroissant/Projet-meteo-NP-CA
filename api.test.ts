@@ -60,7 +60,7 @@ describe("API Meteo", () => {
       },
     );
   });
-    it("GET /cities/:zipCode/weather get all information's weather for a city", async () => {
+  it("GET /cities/:zipCode/weather get all information's weather for a city", async () => {
     const res = await request(app).get("/cities/75001/weather");
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
