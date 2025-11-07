@@ -1,14 +1,17 @@
 [
   {
-    "id": "25000",
+    "id": 1,
+    "zipCode": "25000",
     "weather": "pluie"
   },
   {
-    "id": "21000",
+    "id": 2,
+    "zipCode": "21000",
     "weather": "beau"
   },
   {
-    "id": "75001",
+    "id": 3,
+    "zipCode": "75001",
     "weather": "neige"
   }
 ]

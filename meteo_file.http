@@ -30,7 +30,7 @@ POST {{BASE_URL}}/cities/{{ZIP_CODE}}/weather
 Content-Type: application/json
 
 {
-  "id": "13001",
+  "zipCode": "13001",
   "weather": "pluie"
 }
 

@@ -71,7 +71,7 @@ describe("API Meteo", () => {
   });
   it("POST /cities/:zipCode/weather create a weather for a city", async () => {
     const newWeather = {
-      id: "13001",
+      zipCode: "13001",
       weather: "pluie"
     };
     const res = await request(app)
@@ -80,11 +80,11 @@ describe("API Meteo", () => {
       .set('Content-Type', 'application/json');
     
     expect(res.status).toBe(201);
-    expect(res.body).toBe(13001);
+    expect(res.body).toBe(4);
   });
 
   it("DELETE weather/:id delete city's weather", async () => {
-    const res = await request(app).delete("/weather/13001");
+    const res = await request(app).delete("/weather/4");
     expect(res.status).toBe(204);
   });
 });
